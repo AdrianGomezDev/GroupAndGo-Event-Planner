@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewAccountActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/create_account"
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
