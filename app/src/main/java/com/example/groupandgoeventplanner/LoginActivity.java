@@ -251,7 +251,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void startNavActivityIfVerified(FirebaseUser user){
         if(user.isEmailVerified()) {
-            Intent myIntent = new Intent(LoginActivity.this, NavigationActivity.class);
+            Intent myIntent = new Intent(LoginActivity.this, MainScreenActivity.class);
             LoginActivity.this.startActivity(myIntent);
             finish();
         }
