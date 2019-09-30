@@ -20,6 +20,16 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main_screen"
-        app:menu="@menu/activity_main_screen_drawer" />
+        app:menu="@menu/activity_main_screen_drawer" >
+
+        <Button
+            android:id="@+id/sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="125dp"
+            android:onClick="sign_out_handler"
+            android:text="Sign out" />
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
