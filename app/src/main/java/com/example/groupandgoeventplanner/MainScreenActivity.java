@@ -19,10 +19,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainScreenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,6 +108,8 @@ public class MainScreenActivity extends AppCompatActivity
     }
 
     public void sign_out_handler(View view) {
-        FirebaseAuth.getInstance().signOut();
+        //FirebaseAuth.getInstance().signOut();
+        mAuth.signOut();
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
