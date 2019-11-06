@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private DocumentReference users_emails = FirebaseFirestore.getInstance().document("/users/users_emails");
 
     private TextView mStatusTextView;
     private EditText mEmailField;
@@ -218,6 +219,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if(!mAuth.getCurrentUser().isEmailVerified()){
                                 sendEmailVerification();
                             }
+                            Map<String, Object> user_email = new HashMap<>();
+                            user_email.put(data.getStringExtra("username"), data.getStringExtra("email"));
+
+                            users_emails.set(user_email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "Added user name and email");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d(TAG, "Failed adding user name and email");
+                                }
+                            });
                             Map<String, Object> user = new HashMap<>();
                             user.put( "username", data.getStringExtra("username"));
                             user.put(    "email", data.getStringExtra("email"));
@@ -251,7 +266,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void startNavActivityIfVerified(FirebaseUser user){
         if(user.isEmailVerified()) {
-            Intent myIntent = new Intent(LoginActivity.this, NavigationActivity.class);
+            Intent myIntent = new Intent(LoginActivity.this, MainScreenActivity.class);
+            //If the user logined for the first time, their email we be pushed into users_emails collection
+            //in firebase
             LoginActivity.this.startActivity(myIntent);
             finish();
         }
