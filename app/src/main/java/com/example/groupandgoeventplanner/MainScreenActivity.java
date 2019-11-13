@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 
 public class MainScreenActivity extends AppCompatActivity
@@ -86,11 +90,16 @@ public class MainScreenActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment newFragment = null;
+
         if (id == R.id.nav_camera) {
             // Handle create new group activity
             Intent intent = new Intent(this, CreateGroupActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, MapViewerActivity.class);
+            startActivity(intent);
+            //newFragment = MapViewerActivity.newInstance();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -100,6 +109,15 @@ public class MainScreenActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }
+
+        // Replace the current fragment with the selected fragment if it is different fragment
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFragment != null && !Objects.requireNonNull(currentFragment).getClass().equals(newFragment.getClass())) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, newFragment);
+            ft.addToBackStack(null);
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
