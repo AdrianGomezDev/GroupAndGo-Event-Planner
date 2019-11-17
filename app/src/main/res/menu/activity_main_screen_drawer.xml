@@ -5,17 +5,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_create_groups"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Create groups" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_show_invitations"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Show invitations" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_show_groups"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Show groups" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

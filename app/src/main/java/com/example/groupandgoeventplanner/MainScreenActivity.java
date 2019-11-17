@@ -86,13 +86,15 @@ public class MainScreenActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_create_groups) {
             // Handle create new group activity
             Intent intent = new Intent(this, CreateGroupActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_show_groups) {
+            //Handle showing groups
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_show_invitations) {
+            //Handle showing invitations
 
         } else if (id == R.id.nav_manage) {
 

@@ -78,4 +78,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+
+
+    public void deleteItem(int position) {
+        String mRecentlyDeletedItem = mData.get(position);
+        int mRecentlyDeletedItemPosition = position;
+        mData.remove(position);
+        notifyItemRemoved(position);
+        //showUndoSnackbar();
+    }
 }
