@@ -15,7 +15,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAYYZdVAhKL9V0T0SbgfZiJPnSNLmRpm8Q" />
+            android:value="AIzaSyDisENTsfM6bGpmmUJDrCHR31VQfci3K5c" />
 
         <activity android:name=".CreateGroupActivity"></activity>
         <activity
