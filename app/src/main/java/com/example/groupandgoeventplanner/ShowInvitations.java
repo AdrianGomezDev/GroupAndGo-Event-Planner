@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,6 +20,7 @@ public class ShowInvitations extends AppCompatActivity implements Adapter.ItemCl
     private RecyclerView data;
     private ArrayList<String> groups;
     private DocumentReference invitees = FirebaseFirestore.getInstance().document("/Pending/Invitees");
+    private CollectionReference Invitees = FirebaseFirestore.getInstance().collection("/Invitees");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

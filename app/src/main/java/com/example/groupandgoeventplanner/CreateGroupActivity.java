@@ -1,22 +1,27 @@
 package com.example.groupandgoeventplanner;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -31,7 +36,7 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
     private DocumentReference users_emails = FirebaseFirestore.getInstance().document("/users/users_emails");
     private CollectionReference groups = FirebaseFirestore.getInstance().collection("/groups");
     private DocumentReference pending_invites = FirebaseFirestore.getInstance().document("/Pending/pendingInvites");
-    private DocumentReference m_invitees = FirebaseFirestore.getInstance().document("/Pending/Invitees");
+    private CollectionReference m_invitees = FirebaseFirestore.getInstance().collection("/Invitees");
 
 
     private FirebaseUser user;
@@ -40,6 +45,9 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
     private List<String> group_members_emails;
     private String m_group_name;
     RecyclerView recyclerView;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String current_user_name;
+    private final String TAG = "LNDF";
 
 
     @Override
@@ -50,8 +58,33 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
         recyclerView = findViewById(R.id.group_members);
         user = FirebaseAuth.getInstance().getCurrentUser();
         current_user_email = user.getEmail();
+        String u_id = user.getUid();
 
-        //Toast.makeText(this, user.getUid(),Toast.LENGTH_SHORT).show();
+        //final String current_user_name;
+        /**
+        DocumentReference docRef = db.collection("users").document(u_id);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //current_user_name = document.getData().get("username").toString();
+                        current_user_name = document.getString("username");
+                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    }
+                    else {
+                        Log.d(TAG, "DocumentSnapshot data: ");
+                    }
+
+                }
+            }
+        });
+         **/
+
+
+        Toast.makeText(this, current_user_name, Toast.LENGTH_LONG).show();
         setUpRecyclerView();
     }
 
@@ -199,19 +232,26 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
 
         //Create a host object and invitees objects
         Host host = new Host(current_user_email);
+        ArrayList<Invitation> invitations = new ArrayList<>();
         ArrayList<Invitees> invitees = new ArrayList<>();
         //At first the status of accepting invitation is false for all invitees
         for (int i = 0; i < group_members_emails.size(); i++) {
             //invitees.add(new Invitees(group_members_emails.get(i), false))
-            Invitees current_invitee = new Invitees(group_members_emails.get(i));
+            Invitation new_invitation = new Invitation(m_group_name, "host", false);
+            Invitees current_invitee = new Invitees(group_members_emails.get(i), "host");
             current_invitee.invitedTo(m_group_name);
+            invitations.add(new_invitation);
             invitees.add(current_invitee);
         }
-        host.create_group(m_group_name, invitees);
+        //host.create_group(m_group_name, invitees);
 
 
-        for (int i = 0; i < invitees.size(); i++){
-            m_invitees.update(invitees.get(i).getInviteeEmail(), invitees.get(i));
+        //m_invitees.document("invitees.get(")
+        for (int i = 0; i < invitations.size(); i++) {
+
+            //m_invitees.update(invitees.get(i).getInviteeEmail(), "groups", FieldValue.arrayUnion("greater_virginia"));
+            m_invitees.document(invitees.get(i).getInviteeEmail()).update("groups", FieldValue.arrayUnion(m_group_name));
+            m_invitees.document(invitees.get(i).getInviteeEmail()).update("hosts", FieldValue.arrayUnion("host"));
         }
 
 
