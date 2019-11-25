@@ -83,7 +83,7 @@ public class Home extends Fragment {
                     if (document != null) {
                         String firstName = document.getString("firstName");
                         Log.i("FireStore", firstName);
-                        String str = "Hello!\n Welcome to Group And Go, " + Util.capitalizeString(Objects.requireNonNull(firstName)) + "!";
+                        String str = "Hello " + Util.capitalizeString(Objects.requireNonNull(firstName)) + "!\n Welcome to Group And Go Event Viewer!";
                         textView.setText(str);
                     } else {
                         Log.d("FireStore", "No such document");
