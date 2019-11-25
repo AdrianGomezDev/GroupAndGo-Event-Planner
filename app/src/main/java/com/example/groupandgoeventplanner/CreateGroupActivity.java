@@ -60,28 +60,32 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
         current_user_email = user.getEmail();
         String u_id = user.getUid();
 
-        //final String current_user_name;
-        /**
+
+
+
         DocumentReference docRef = db.collection("users").document(u_id);
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    //DocumentSnapshot document = task.getResult();
+                    //if (document.exists()) {
                         //current_user_name = document.getData().get("username").toString();
-                        current_user_name = document.getString("username");
-                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    }
-                    else {
-                        Log.d(TAG, "DocumentSnapshot data: ");
-                    }
+                        //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                        //current_user_name = document.getData().toString();
+                        //Log.d(TAG, document.getId() + " => " + document.getData());
+                        Map<String, Object> data = documentSnapshot.getData();
+                        current_user_name = data.get("username").toString();
+                        Log.d(TAG, "exists");
+
+                    //
 
                 }
             }
         });
-         **/
+
 
 
         Toast.makeText(this, current_user_name, Toast.LENGTH_LONG).show();

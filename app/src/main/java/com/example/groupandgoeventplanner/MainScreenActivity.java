@@ -95,6 +95,8 @@ public class MainScreenActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_show_invitations) {
             //Handle showing invitations
+            Intent intent = new Intent(this, ShowInvitations.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 
