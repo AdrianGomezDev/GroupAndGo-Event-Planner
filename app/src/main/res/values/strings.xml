@@ -52,9 +52,9 @@
     <string name="exercise_label">Exercise</string>
     <string name="name_edit">Name</string>
     <string name="points_value">Points Value</string>
-    <string name="goalnamepage">Goal Name</string>
-    <string name="exname">Exercise Name</string>
-    <string name="points_values">Points Value:</string>
+    <string name="eventnamepage">Event Name</string>
+    <string name="locname">Location Name</string>
+
     <string name="status">Status:</string>
     <string name="complete_exclamation">Complete!</string>
     <string name="back">BACK</string>
@@ -62,4 +62,5 @@
     <string name="auth_failed">Authentication Failed.</string>
     <string name="app_name">Group And Go: Event Planner</string>
     <string name="title_activity_main_screen">MainScreenActivity</string>
+    <string name="blank">Location</string>
 </resources>
