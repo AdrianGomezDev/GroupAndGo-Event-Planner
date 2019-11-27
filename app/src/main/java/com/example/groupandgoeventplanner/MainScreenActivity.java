@@ -103,12 +103,6 @@ public class MainScreenActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         // Replace the current fragment with the selected fragment if it is different fragment

@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/event_background"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="50dp">
@@ -101,18 +101,30 @@
         <Button
             android:id="@+id/submitButton"
             style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/rectangle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#418FCF"
             android:text="@string/create_account"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#3F51B5"
+            android:textColorLink="#3F51B5"
+            android:drawableRight = "@drawable/create"
+            android:drawablePadding = "-25dp"/>
 
         <Button
             android:id="@+id/cancelButton"
             style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/rectangle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="#418FCF"
             android:text="@string/cancel"
-            android:textColor="#FFFFFF" />
+            android:drawableRight = "@drawable/cancel"
+            android:drawablePadding = "-25dp"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 
 </ScrollView>

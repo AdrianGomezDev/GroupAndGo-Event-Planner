@@ -11,7 +11,7 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/beach"
+        android:background="@drawable/event_background"
         android:orientation="vertical">
 
         <ImageView
@@ -19,23 +19,26 @@
             android:layout_width="wrap_content"
             android:layout_height="300dp"
             android:contentDescription="@string/desc_beachfit_logo"
-            android:src="@drawable/beachfitlogo_2"
+            android:src="@drawable/main_page_icon"
             app:layout_constraintBottom_toTopOf="@+id/status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintVertical_chainStyle="spread"
+            app:srcCompat="@drawable/main_page_icon" />
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:background="#BC1A1919"
+            android:backgroundTint="#F5000000"
             android:text="@string/signed_out"
+            android:textColor="#F7F3F3"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/fieldEmail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon" />
 
@@ -79,18 +82,15 @@
 
         <LinearLayout
             android:id="@+id/login_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="303dp"
+            android:layout_height="154dp"
             android:layout_marginStart="70dp"
-            android:layout_marginLeft="70dp"
             android:layout_marginEnd="70dp"
-            android:layout_marginRight="70dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fieldPassword"
             app:layout_constraintVertical_bias="0.447">
@@ -100,41 +100,70 @@
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="186dp"
                 android:layout_height="36dp"
-                android:text="@string/Forgot_Password"
+                android:layout_margin="10dp"
+                android:background="@drawable/rectangle"
+                android:backgroundTint="#418FCF"
                 android:onClick="passwordReset"
+                android:text="@string/Forgot_Password"
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5"
                 android:visibility="visible" />
 
             <Button
                 android:id="@+id/signOutButton"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:background="@drawable/rectangle"
+                android:backgroundTint="#418FCF"
                 android:text="@string/sign_out"
-                android:visibility="visible" />
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5"
+                android:visibility="visible"
+                android:drawableRight = "@drawable/cancel"
+                android:drawablePadding = "-25dp"/>
 
             <Button
                 android:id="@+id/verifyEmailButton"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rectangle"
+                android:backgroundTint="#418FCF"
+                android:scrollbarSize="4dp"
                 android:text="@string/verify_email"
-                android:visibility="visible" />
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5"
+                android:visibility="visible"
+                android:drawableRight = "@drawable/email"
+                android:drawablePadding = "-25dp"/>
 
             <Button
                 android:id="@+id/emailSignInButton"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:backgroundTint="#418FCF"
                 android:text="@string/sign_in"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:background="@drawable/rectangle"
+                android:drawableRight = "@drawable/signin"
+                android:drawablePadding = "-25dp"
+                />
 
             <Button
                 android:id="@+id/emailCreateAccountButton"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="#418FCF"
                 android:text="@string/create_account"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:drawableRight = "@drawable/create"
+                android:drawablePadding = "-25dp"/>
 
         </LinearLayout>
 

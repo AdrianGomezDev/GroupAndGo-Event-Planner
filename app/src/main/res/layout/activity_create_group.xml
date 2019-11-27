@@ -23,7 +23,8 @@
         android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="Search"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        />
 
     <EditText
         android:id="@+id/group_name"
@@ -41,7 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="160dp"
         android:layout_marginTop="500dp"
-        android:text="Create Group" />
+        android:text="Create Group"
+        android:textColor = "#FFFFFF"
+        android:backgroundTint="#418FCF"/>
 
     <Button
         android:id="@+id/search_for_email"
@@ -50,7 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="320dp"
         android:layout_marginTop="80dp"
-        android:text="Search" />
+        android:text="Search"
+        android:textColor = "#FFFFFF"
+        android:backgroundTint="#418FCF"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_results"
