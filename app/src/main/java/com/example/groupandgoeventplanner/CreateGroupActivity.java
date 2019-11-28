@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,12 +151,15 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
                             result.add(key);
                         }
                     }
+                    Log.d("Inside the loop", "DocumentSnapshot data dsfkbd: " + result);
 
                 }
 
 
             }
         });
+        Log.d("COME HERE", "dfdjn");
+        Log.d("OUT OF THE LOOP", "DocumentSnapshot data dsfkbd: " + result);
         RecyclerView recycler_view_search_results = findViewById(R.id.search_results);
         recycler_view_search_results.setLayoutManager(new LinearLayoutManager(this));
         search_members_adapter = new Adapter(this, result);
@@ -249,13 +253,41 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
         }
         //host.create_group(m_group_name, invitees);
 
+        //Check if this invitee already exists, if not create a document with his name
 
         //m_invitees.document("invitees.get(")
         for (int i = 0; i < invitations.size(); i++) {
-
+            final String current_invitee = invitees.get(i).getInviteeEmail();
+            DocumentReference docRef = m_invitees.document(current_invitee);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            //Update array
+                            m_invitees.document(current_invitee).update("groups", FieldValue.arrayUnion(m_group_name));
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        } else {
+                            //Create a single-element array
+                            Map<String, Object> docData = new HashMap<>();
+                            docData.put("groups", Arrays.asList(current_invitee));
+                            m_invitees.document(current_invitee).set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                }
+                            });
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
             //m_invitees.update(invitees.get(i).getInviteeEmail(), "groups", FieldValue.arrayUnion("greater_virginia"));
-            m_invitees.document(invitees.get(i).getInviteeEmail()).update("groups", FieldValue.arrayUnion(m_group_name));
-            m_invitees.document(invitees.get(i).getInviteeEmail()).update("hosts", FieldValue.arrayUnion("host"));
+           // m_invitees.document(invitees.get(i).getInviteeEmail()).update("groups", FieldValue.arrayUnion(m_group_name));
+            //m_invitees.document(invitees.get(i).getInviteeEmail()).update("hosts", FieldValue.arrayUnion("host"));
         }
 
 

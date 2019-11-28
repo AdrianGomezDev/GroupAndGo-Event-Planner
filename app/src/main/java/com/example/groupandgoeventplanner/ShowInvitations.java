@@ -27,11 +27,13 @@ public class ShowInvitations extends AppCompatActivity implements Adapter.ItemCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_invitations);
+        //setUpRecyclerView();
+        //setContentView(R.layout.activity_show_invitations);
+
         //Go to invitees and grab the data
-        m_current_user_name = getCurrentUserName();
-        Toast.makeText(getApplicationContext(), m_current_user_name, Toast.LENGTH_SHORT).show();
-        data = findViewById(R.id.group_names);
+       // m_current_user_name = getCurrentUserName();
+        //Toast.makeText(getApplicationContext(), m_current_user_name, Toast.LENGTH_SHORT).show();
+        //data = findViewById(R.id.group_names);
         /**
         Invitees.document(m_current_user_name).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -52,11 +54,13 @@ public class ShowInvitations extends AppCompatActivity implements Adapter.ItemCl
         });
          **/
         //RecyclerView recycler_view_search_results = findViewById(R.id.search_results);
+        /**
         data.setLayoutManager(new LinearLayoutManager(this));
         group_names = new Adapter(this, groups);
         group_names.setClickListener(this);
         data.setAdapter(group_names);
         group_names.notifyDataSetChanged();
+         **/
 
     }
     public String getCurrentUserName() {

@@ -63,4 +63,5 @@
     <string name="app_name">Group And Go: Event Planner</string>
     <string name="title_activity_main_screen">MainScreenActivity</string>
     <string name="blank">Location</string>
+    <string name="title_activity_show_groups">ShowGroupsActivity</string>
 </resources>

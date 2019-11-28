@@ -92,10 +92,12 @@ public class MainScreenActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_show_groups) {
             //Handle showing groups
+            Intent intent = new Intent(this, ShowGroupsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_show_invitations) {
             //Handle showing invitations
-            Intent intent = new Intent(this, ShowInvitations.class);
+            Intent intent = new Intent(this, ShowInvitations_3_Activity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
