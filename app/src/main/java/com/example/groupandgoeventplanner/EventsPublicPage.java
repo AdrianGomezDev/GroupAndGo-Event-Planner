@@ -10,22 +10,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.groupandgoeventplanner.Interfaces.OnFragmentInteractionListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-public class EventsPage extends Fragment{
+public class EventsPublicPage extends Fragment{
 
     private static final String ARG_EVENT_NAME = "Event Name";
-    private static final String TAG = "Events";
+    private static final String TAG = "EventsPublic";
 
     final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private OnFragmentInteractionListener mListener;
 
@@ -34,9 +41,9 @@ public class EventsPage extends Fragment{
     private TextView locationName;
     private TextView complete;
 
-    private EventsModel eventsModel;
+    private EventsPublicModel eventsPublicModel;
 
-    public EventsPage() {
+    public EventsPublicPage() {
         // Required empty public constructor
     }
 
@@ -48,8 +55,8 @@ public class EventsPage extends Fragment{
      * @return A new instance of fragment Exercise.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsPage newInstance(String eventName) {
-        EventsPage fragment = new EventsPage();
+    public static EventsPublicPage newInstance(String eventName) {
+        EventsPublicPage fragment = new EventsPublicPage();
         Bundle args = new Bundle();
         args.putString(ARG_EVENT_NAME, eventName);
         fragment.setArguments(args);
@@ -68,23 +75,23 @@ public class EventsPage extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View layout = inflater.inflate(R.layout.fragment_eventspage, container, false);
+        View layout = inflater.inflate(R.layout.fragment_eventspublicpage, container, false);
 
         if (getArguments() != null) {
             final String eventName = getArguments().getString(ARG_EVENT_NAME);
             readData(eventName, new FirestoreCallback() {
                 @Override
-                public void onCallBack(EventsModel eventsModel) {
+                public void onCallBack(EventsPublicModel eventsPublicModel) {
 
-                    if(eventsModel.isComplete()){
+                    if(eventsPublicModel.isComplete()){
                         complete.setText("Complete");
                     }
                     else{
                         complete.setText("Active");
                     }
                     // Populate TextViews
-                    name.setText(eventsModel.getName());
-                    locationName.setText(eventsModel.getLocationName());
+                    name.setText(eventsPublicModel.getName());
+                    locationName.setText(eventsPublicModel.getLocationName());
 
 
 
@@ -104,26 +111,51 @@ public class EventsPage extends Fragment{
             @Override
             public void onClick(View v) {
 
+                Map<String, Object> eventDoc = new HashMap<>();
+                Map<String, Object> nestedEventData = new HashMap<>();
 
-                FirebaseFirestore.getInstance().collection("users")
-                        .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
-                        .collection("Event Logs")
-                        .document(name.getText().toString())
-                        .delete()
+
+
+                eventDoc.put("name",name.getText().toString());
+                eventDoc.put("locationName", locationName.getText().toString());
+                //eventDoc.put("date", );
+                eventDoc.put("complete", false);
+
+                // Update FireStore database
+                        /*db.collection("users").document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
+                                .collection("Goal Logs").document(goalNameInput.getText().toString())
+                                .set(goalDoc, SetOptions.merge())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("FIRESTORE", "DocumentSnapshot successfully written!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("FIRESTORE", "Error writing document", e);
+                                    }
+                                });*/
+
+                db.collection("users").document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
+                        .collection("Event Logs").document(name.getText().toString())
+                        .set(eventDoc, SetOptions.merge())
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Log.d("FireStore", "DocumentSnapshot successfully written!");
+                                Log.d("FIRESTORE", "DocumentSnapshot successfully written!");
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w("FireStore", "Error writing document", e);
+                                Log.w("FIRESTORE", "Error writing document", e);
                             }
                         });
 
-                getActivity().getSupportFragmentManager().popBackStack();
+                Toast.makeText(getActivity(), "Event Added", Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -165,21 +197,19 @@ public class EventsPage extends Fragment{
 
     private void readData(String eventName, final FirestoreCallback firestoreCallback){
         // Fetch the event from Firestore
-        FirebaseFirestore.getInstance().collection("users")
-                .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
-                .collection("Event Logs")
+        FirebaseFirestore.getInstance().collection("Events")
                 .document(eventName)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        eventsModel = documentSnapshot.toObject(EventsModel.class);
-                        firestoreCallback.onCallBack(eventsModel);
+                        eventsPublicModel = documentSnapshot.toObject(EventsPublicModel.class);
+                        firestoreCallback.onCallBack(eventsPublicModel);
                     }
                 });
     }
 
     private interface FirestoreCallback {
-        void onCallBack(EventsModel eventsModel);
+        void onCallBack(EventsPublicModel eventsPublicModel);
     }
 }

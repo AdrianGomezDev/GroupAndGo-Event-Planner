@@ -59,10 +59,10 @@ public class MainScreenActivity extends AppCompatActivity
             }
         });*/
 
-        /*TextView profileEmail = headerView.findViewById(R.id.profileEmailTextView);
-        if (user != null) {
-            profileEmail.setText(user.getEmail());
-        }*/
+//        TextView profileEmail = headerView.findViewById(R.id.profileEmailTextView);
+//        if (user != null) {
+//            profileEmail.setText(user.getEmail());
+//        }
 
         // Creates and displays the home fragment
         Fragment home = new Home();
@@ -134,6 +134,9 @@ public class MainScreenActivity extends AppCompatActivity
                 startActivity(intent);
                 //newFragment = new ProgressPhotos();
                 break;
+            case R.id.nav_share:
+                newFragment = new EventsPublic();
+                break;
 
         }
 
@@ -155,6 +158,13 @@ public class MainScreenActivity extends AppCompatActivity
     public void onFragmentMessage(String TAG, Object data) {
         if (TAG.equals("Events")){
             EventsPage newFragment = EventsPage.newInstance(data.toString());
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, newFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        else if (TAG.equals("EventsPublic")){
+            EventsPublicPage newFragment = EventsPublicPage.newInstance(data.toString());
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, newFragment);
             fragmentTransaction.addToBackStack(null);

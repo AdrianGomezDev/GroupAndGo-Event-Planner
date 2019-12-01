@@ -23,7 +23,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.Objects;
 
-public class Events extends Fragment {
+public class EventsPublic extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -38,15 +38,15 @@ public class Events extends Fragment {
 
     private RecyclerView recyclerView;
     final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirestoreRecyclerAdapter<EventsModel, EventsViewHolder> adapter;
+    private FirestoreRecyclerAdapter<EventsPublicModel, EventsViewHolder> adapter;
 
 
-    public Events(){
+    public EventsPublic(){
 
     }
 
-    public static Events newInstance(String param1, String param2) {
-        Events fragment = new Events();
+    public static EventsPublic newInstance(String param1, String param2) {
+        EventsPublic fragment = new EventsPublic();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,47 +66,45 @@ public class Events extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Objects.requireNonNull(getActivity()).setTitle("My Events");
+        Objects.requireNonNull(getActivity()).setTitle("Public Events");
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_eventspublic, container, false);
         LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());
 
         newEvent = view.findViewById(R.id.fab);
 
 
-        recyclerView = view.findViewById(R.id.eventsRecyclerView);
+        recyclerView = view.findViewById(R.id.eventsPublicRecyclerView);
 
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-        Query query = rootRef.collection("users")
-                .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
-                .collection("Event Logs")
+        Query query = rootRef.collection("Events")
                 /*.orderBy("date", Query.Direction.ASCENDING)*/;
 
-        final EventsModel eventsModel = new EventsModel("","",false);
+        final EventsPublicModel eventsModel = new EventsPublicModel("","",false);
 
-        FirestoreRecyclerOptions<EventsModel> options = new FirestoreRecyclerOptions.Builder<EventsModel>()
-                .setQuery(query, EventsModel.class)
+        FirestoreRecyclerOptions<EventsPublicModel> options = new FirestoreRecyclerOptions.Builder<EventsPublicModel>()
+                .setQuery(query, EventsPublicModel.class)
                 .build();
 
-        adapter = new FirestoreRecyclerAdapter<EventsModel, EventsViewHolder>(options) {
+        adapter = new FirestoreRecyclerAdapter<EventsPublicModel, EventsViewHolder>(options) {
 
 
             @NonNull
             @Override
             public EventsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 View view = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.event_index, viewGroup, false);
+                        .inflate(R.layout.eventpublic_index, viewGroup, false);
 
                 return new EventsViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull EventsViewHolder holder, int position, @NonNull final EventsModel eventsModel) {
-                final String eventName = eventsModel.getName();
+            protected void onBindViewHolder(@NonNull EventsViewHolder holder, int position, @NonNull final EventsPublicModel eventsPublicModel) {
+                final String eventName = eventsPublicModel.getName();
                 holder.setEventName(eventName);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -134,7 +132,7 @@ public class Events extends Fragment {
 
     public void onButtonPressed(String eventName) {
         if (mListener != null) {
-            mListener.onFragmentMessage("Events", eventName);
+            mListener.onFragmentMessage("EventsPublic", eventName);
             //Toast.makeText(this.getActivity(), eventName, Toast.LENGTH_LONG).show();
 
         }
@@ -181,7 +179,7 @@ public class Events extends Fragment {
         }
 
         void setEventName(String eventName) {
-            TextView textView = view.findViewById(R.id.event_index_text_view);
+            TextView textView = view.findViewById(R.id.eventpublic_index_text_view);
             textView.setText(eventName);
         }
     }
