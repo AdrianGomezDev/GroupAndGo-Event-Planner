@@ -134,6 +134,10 @@ public class MainScreenActivity extends AppCompatActivity
                 startActivity(intent);
                 //newFragment = new ProgressPhotos();
                 break;
+            case R.id.nav_show_invitations_2:
+                intent = new Intent(this, ShowInvitations_3_Activity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_share:
                 newFragment = new EventsPublic();
                 break;
