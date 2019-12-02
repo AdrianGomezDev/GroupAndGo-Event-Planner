@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorWhite"
     tools:context=".Events">
 
 
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:tint="@color/colorPrimary"
-        app:backgroundTint="@color/colorAccent"
+        app:tint="@color/colorWhite"
+        app:backgroundTint="#418FCF"
         />
 
 

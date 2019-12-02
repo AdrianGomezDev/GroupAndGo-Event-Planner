@@ -11,7 +11,7 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/beach"
+        android:background="@drawable/event_background"
         android:orientation="vertical">
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="300dp"
             android:contentDescription="@string/desc_beachfit_logo"
-            android:src="@drawable/beachfitlogo_2"
+            android:src="@drawable/main_page_icon"
             app:layout_constraintBottom_toTopOf="@+id/status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,7 +31,10 @@
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:background="#BC1A1919"
+            android:backgroundTint="#F5000000"
+            android:textColor="#F7F3F3"
+            android:textSize="24sp"
             android:text="@string/signed_out"
             app:layout_constraintBottom_toTopOf="@+id/fieldEmail"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +105,11 @@
                 android:layout_height="36dp"
                 android:text="@string/Forgot_Password"
                 android:onClick="passwordReset"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5"
+                android:backgroundTint="#418FCF"
+                android:drawable="@drawable/rectangle"/>
 
             <Button
                 android:id="@+id/signOutButton"
@@ -110,7 +117,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_out"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5"
+                android:backgroundTint="#418FCF"
+                android:drawable="@drawable/rectangle"
+                android:drawableRight="@drawable/cancel"
+                android:drawablePadding="-25dp"/>
 
             <Button
                 android:id="@+id/verifyEmailButton"
@@ -118,7 +131,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/verify_email"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:drawable="@drawable/rectangle"
+                android:textColorHighlight="#3F51B5"
+                android:textColorLink="#3F51B5"
+                android:backgroundTint="#418FCF"
+                android:drawableRight="@drawable/email"
+                android:drawablePadding="-25dp"/>
 
             <Button
                 android:id="@+id/emailSignInButton"
@@ -126,7 +145,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_in"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:backgroundTint="#418FCF"
+                android:background="@drawable/rectangle"
+                android:drawableRight="@drawable/signin"
+                android:drawablePadding="-25dp"/>
 
             <Button
                 android:id="@+id/emailCreateAccountButton"
@@ -134,7 +157,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/create_account"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:drawable="@drawable/rectangle"
+                android:backgroundTint="#418FCF"
+                android:drawableRight="@drawable/create"
+                android:drawablePadding="-25dp"/>
 
         </LinearLayout>
 

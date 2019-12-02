@@ -172,4 +172,10 @@ public class MainScreenActivity extends AppCompatActivity
         }
 
     }
+
+    public void sign_out_handler(View view) {
+        //FirebaseAuth.getInstance().signOut();
+        mAuth.signOut();
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 }

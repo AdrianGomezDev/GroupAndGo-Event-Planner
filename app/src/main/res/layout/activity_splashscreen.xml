@@ -12,6 +12,6 @@
         android:id="@+id/splash"
         android:layout_width="280dp"
         android:layout_height="252dp"
-        android:background="@drawable/splash_img" />
+        android:background="@drawable/main_page_icon" />
 
 </LinearLayout>
