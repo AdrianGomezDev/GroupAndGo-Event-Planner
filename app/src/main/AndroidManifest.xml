@@ -18,7 +18,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDisENTsfM6bGpmmUJDrCHR31VQfci3K5c" />
-
+        <activity android:name=".ShowInvitations_3_Activity"></activity>
         <activity android:name=".CreateGroupActivity"></activity>
         <activity
             android:name=".MainScreenActivity"
