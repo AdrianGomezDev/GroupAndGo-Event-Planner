@@ -1,6 +1,9 @@
 package com.example.groupandgoeventplanner;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,16 +16,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.groupandgoeventplanner.Interfaces.OnFragmentInteractionListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.SetOptions;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -40,6 +52,10 @@ public class EventsPublicPage extends Fragment{
     private TextView date;
     private TextView locationName;
     private TextView complete;
+    Intent intent;
+    GeoPoint geo;
+
+
 
     private EventsPublicModel eventsPublicModel;
 
@@ -103,27 +119,79 @@ public class EventsPublicPage extends Fragment{
 
         name = layout.findViewById(R.id.event_name_text_view);
         locationName = layout.findViewById(R.id.location_text_view);
-        complete = layout.findViewById(R.id.muscle_text_view);
+        complete = layout.findViewById(R.id.status_text_view);
         Button completeButton = layout.findViewById(R.id.completeButton);
         Button backButton = layout.findViewById(R.id.backButton);
+        Button mapButton = layout.findViewById(R.id.mapButton);
+
+        //FirebaseFirestore ref = FirebaseFirestore.getInstance();
+
+
+
 
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Map<String, Object> eventDoc = new HashMap<>();
+                final Map<String, Object> eventDoc = new HashMap<>();
                 Map<String, Object> nestedEventData = new HashMap<>();
 
+                /*FirebaseFirestore ref = FirebaseFirestore.getInstance();
+                DocumentReference docRef = ref.collection("Events").document(name.getText().toString());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                geo = document.getGeoPoint("latLong");
+                            } else {
+                                //Log.d(TAG, "No such document");
+                            }
+                        }
+                        else{
+                            //Log.d(TAG,"get failed with ", task.getException());
+                        }
+                    }
+                });*/
 
+                //final GeoPoint point;
+
+                DocumentReference docRef = FirebaseFirestore.getInstance().collection("Events").document(name.getText().toString());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                //intent = getIntent();
+                                //GeoPoint point = document.getGeoPoint("latLong");
+                                //double lat = point.getLatitude();
+                                //double lng = point.getLongitude();
+                                //eventDoc.put("latLong",point);
+                            } else {
+                                //Log.d(TAG, "No such document");
+                            }
+                        }
+                        else{
+                            //Log.d(TAG,"get failed with ", task.getException());
+                        }
+                    }
+                });
+
+                GeoPoint point = GetLocationFromAddress(locationName.getText().toString());
 
                 eventDoc.put("name",name.getText().toString());
                 eventDoc.put("locationName", locationName.getText().toString());
                 //eventDoc.put("date", );
                 eventDoc.put("complete", false);
+                eventDoc.put("latLong",point);
 
                 // Update FireStore database
                         /*db.collection("users").document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
-                                .collection("Goal Logs").document(goalNameInput.getText().toString())
+                                .collection("Event Logs").document(goalNameInput.getText().toString())
                                 .set(goalDoc, SetOptions.merge())
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -163,6 +231,18 @@ public class EventsPublicPage extends Fragment{
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        mapButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(EventsPublicPage.this.getActivity(),MapViewerActivityPublic.class);
+                //intent.putExtra("lat", geo.getLatitude());
+                //intent.putExtra("long", geo.getLongitude());
+                intent.putExtra("eventName",name.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -207,6 +287,33 @@ public class EventsPublicPage extends Fragment{
                         firestoreCallback.onCallBack(eventsPublicModel);
                     }
                 });
+    }
+
+    public GeoPoint GetLocationFromAddress(String addressStr){
+        Geocoder coder = new Geocoder(this.getActivity());
+        List<Address> address;
+        GeoPoint point = null;
+
+        try{
+            address = coder.getFromLocationName(addressStr,5);
+            if (address == null) {
+
+                return null;
+            }
+
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            point = new GeoPoint((double) (location.getLatitude()),
+                    (double) (location.getLongitude()));
+
+
+        }
+        catch(IOException e) {
+
+        }
+        return point;
     }
 
     private interface FirestoreCallback {

@@ -69,4 +69,7 @@
     <string name="end_date_label">End Date Label</string>
     <string name="address">Address</string>
     <string name="example_address">55555 Five Ave Long Beach CA 90840</string>
+    <string name="view_location">View Location</string>
+    <string name="add_to_my_events2">   Add to My Events   </string>
+    <string name="view_location_on_map">   View Location on Map   </string>
 </resources>
