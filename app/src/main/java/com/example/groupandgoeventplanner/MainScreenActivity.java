@@ -127,12 +127,12 @@ public class MainScreenActivity extends AppCompatActivity
             case R.id.nav_slideshow:
                 intent = new Intent(this,CreateGroupActivity.class);
                 startActivity(intent);
-                //newFragment = new Diet();
+
                 break;
             case R.id.nav_manage:
                 intent = new Intent(this,MapViewerActivity.class);
                 startActivity(intent);
-                //newFragment = new ProgressPhotos();
+
                 break;
             case R.id.nav_show_invitations_2:
                 intent = new Intent(this, ShowInvitations_3_Activity.class);
