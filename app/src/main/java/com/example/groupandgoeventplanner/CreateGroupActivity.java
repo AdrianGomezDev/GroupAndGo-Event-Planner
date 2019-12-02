@@ -38,6 +38,7 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
     private CollectionReference groups = FirebaseFirestore.getInstance().collection("/groups");
     private DocumentReference pending_invites = FirebaseFirestore.getInstance().document("/Pending/pendingInvites");
     private CollectionReference m_invitees = FirebaseFirestore.getInstance().collection("/Invitees");
+    private CollectionReference m_groups = FirebaseFirestore.getInstance().collection("/Groups");
 
 
     private FirebaseUser user;
@@ -289,6 +290,39 @@ public class CreateGroupActivity extends AppCompatActivity implements Adapter.It
            // m_invitees.document(invitees.get(i).getInviteeEmail()).update("groups", FieldValue.arrayUnion(m_group_name));
             //m_invitees.document(invitees.get(i).getInviteeEmail()).update("hosts", FieldValue.arrayUnion("host"));
         }
+        //Push information into groups
+        /**
+        DocumentReference docRef = m_groups.document(m_group_name);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //Update array
+                        m_invitees.document(current_invitee).update("groups", FieldValue.arrayUnion(m_group_name));
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        //Create a single-element array
+                        Map<String, Object> docData = new HashMap<>();
+                        docData.put("members", Arrays.asList(current_invitee));
+                        m_invitees.document(current_invitee).set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        });
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+         **/
+
+
+
 
 
 
