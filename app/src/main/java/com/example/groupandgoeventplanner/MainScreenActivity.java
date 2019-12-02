@@ -97,9 +97,13 @@ public class MainScreenActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_show_invitations) {
             //Handle showing invitations
+            //Intent intent = new Intent(this, ShowInvitations_3_Activity.class);
+            //startActivity(intent);
+
+        }
+        else if (id == R.id.nav_show_invitations_2) {
             Intent intent = new Intent(this, ShowInvitations_3_Activity.class);
             startActivity(intent);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -125,6 +125,7 @@ public class ShowInvitations_3_Activity extends AppCompatActivity implements Ada
             }
         });
 
+
     }
     private interface helperInvitation{
         void onCallback(ArrayList<String> list);
