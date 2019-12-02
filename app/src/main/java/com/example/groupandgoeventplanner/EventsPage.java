@@ -96,7 +96,7 @@ public class EventsPage extends Fragment{
 
         name = layout.findViewById(R.id.event_name_text_view);
         locationName = layout.findViewById(R.id.location_text_view);
-        complete = layout.findViewById(R.id.muscle_text_view);
+        complete = layout.findViewById(R.id.complete_text_view);
         Button completeButton = layout.findViewById(R.id.completeButton);
         Button backButton = layout.findViewById(R.id.backButton);
 

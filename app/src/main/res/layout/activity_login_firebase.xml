@@ -18,7 +18,7 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="300dp"
-            android:contentDescription="@string/desc_beachfit_logo"
+            android:contentDescription="@string/desc_gag_logo"
             android:src="@drawable/main_page_icon"
             app:layout_constraintBottom_toTopOf="@+id/status"
             app:layout_constraintEnd_toEndOf="parent"

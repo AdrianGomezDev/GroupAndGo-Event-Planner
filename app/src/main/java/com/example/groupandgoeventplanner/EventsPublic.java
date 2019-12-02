@@ -121,8 +121,8 @@ public class EventsPublic extends Fragment {
         {
             @Override
             public void onClick (View view){
-                //DialogFragment dialogFragment = AddEventLog.newInstance(eventsModel);
-                //dialogFragment.show(getChildFragmentManager(), "Event Log");
+                DialogFragment dialogFragment = AddPublicEvent.newInstance(eventsModel);
+                dialogFragment.show(getChildFragmentManager(), "Event Log");
             }
         });
         recyclerView.setAdapter(adapter);

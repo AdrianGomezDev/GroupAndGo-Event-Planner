@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPublicEvent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/eventNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/event_label"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/eventNameEditText"
+            app:layout_constraintEnd_toStartOf="@+id/eventNameEditText"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/eventNameEditText" />
+
+        <EditText
+            android:id="@+id/eventNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/event_name"
+            android:inputType="text"
+            android:longClickable="false"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/dateOfEventEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/eventNameLabel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/dateOfEventLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_label"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/dateOfEventEditText"
+            app:layout_constraintEnd_toEndOf="@+id/eventNameLabel"
+            app:layout_constraintTop_toTopOf="@+id/dateOfEventEditText" />
+
+        <TextView
+            android:id="@+id/dateOfEventEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/editTextBackground"
+            android:hint="@string/mm_dd_yyyy"
+            android:longClickable="false"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/eventNameEditText"
+            app:layout_constraintTop_toBottomOf="@+id/eventNameEditText" />
+
+        <TextView
+            android:id="@+id/endDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_date_label"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/endDateEditText"
+            app:layout_constraintEnd_toEndOf="@id/dateOfEventLabel"
+            app:layout_constraintTop_toTopOf="@+id/endDateEditText" />
+
+        <TextView
+            android:id="@+id/endDateEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/editTextBackground"
+            android:hint="@string/mm_dd_yyyy"
+            android:longClickable="false"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/dateOfEventEditText"
+            app:layout_constraintTop_toBottomOf="@id/dateOfEventEditText" />
+
+
+
+        <TextView
+            android:id="@+id/addressLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/addressEditText"
+            app:layout_constraintEnd_toEndOf="@id/endDateLabel"
+            app:layout_constraintTop_toBottomOf="@+id/endDateLabel" />
+
+        <EditText
+            android:id="@+id/addressEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="@string/example_address"
+            android:inputType="text"
+            android:longClickable="false"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/endDateEditText"
+            app:layout_constraintTop_toBottomOf="@id/endDateEditText"
+            />
+
+<!--        <Spinner-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/dateOfEventEditText"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/dateOfEventEditText"/>-->
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

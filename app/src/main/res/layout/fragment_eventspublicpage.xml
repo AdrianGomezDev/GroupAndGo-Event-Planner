@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/exercise_label"
+            android:id="@+id/loc_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -52,7 +52,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/exercise_label"
+            app:layout_constraintStart_toEndOf="@+id/loc_label"
             app:layout_constraintTop_toBottomOf="@+id/event_name_text_view" />
 
 

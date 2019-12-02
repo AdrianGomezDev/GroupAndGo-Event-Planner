@@ -71,7 +71,7 @@ public class Events extends Fragment {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
         LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());
 
-        newEvent = view.findViewById(R.id.fab);
+        //newEvent = view.findViewById(R.id.fab);
 
 
         recyclerView = view.findViewById(R.id.eventsRecyclerView);
@@ -119,14 +119,14 @@ public class Events extends Fragment {
             }
         };
 
-        newEvent.setOnClickListener(new View.OnClickListener()
+        /*newEvent.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick (View view){
-                //DialogFragment dialogFragment = AddEventLog.newInstance(eventsModel);
+                //DialogFragment dialogFragment = AddPublicEvent.newInstance(eventsModel);
                 //dialogFragment.show(getChildFragmentManager(), "Event Log");
             }
-        });
+        });*/
         recyclerView.setAdapter(adapter);
 
         return view;

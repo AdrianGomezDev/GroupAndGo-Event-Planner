@@ -26,7 +26,7 @@
     <string name="verify_email">Verify Email</string>
     <string name="create_account">Create Account</string>
     <string name="sign_in">Sign In</string>
-    <string name="desc_beachfit_logo">Group And Go Logo</string>
+    <string name="desc_gag_logo">Group And Go Logo</string>
 
     <string name="emailpassword_title_text">Welcome to Group And Go!</string>
 
@@ -47,13 +47,12 @@
 
 
     <string name="mm_dd_yyyy">MM/DD/YYYY</string>
-    <string name="contact_us_send_any_questions_and_concerns_to_beachfit_firebase_app_com">Contact Us! Send Any Questions and Concerns to beachfit@firebase.app.com</string>
-    <string name="num_hint">####</string>
-    <string name="exercise_label">Exercise</string>
+     <string name="num_hint">####</string>
+
     <string name="name_edit">Name</string>
-    <string name="points_value">Points Value</string>
+
     <string name="eventnamepage">Event Name</string>
-    <string name="locname">Location Name</string>
+    <string name="locname">Address</string>
 
     <string name="status">Status:</string>
     <string name="complete_exclamation">Complete!</string>
@@ -64,4 +63,10 @@
     <string name="title_activity_main_screen">MainScreenActivity</string>
     <string name="blank">Location</string>
     <string name="add_to_my_events">Add to My Events</string>
+    <string name="event_label">Event Label</string>
+    <string name="event_name">Event Name</string>
+    <string name="date_label">Date Label</string>
+    <string name="end_date_label">End Date Label</string>
+    <string name="address">Address</string>
+    <string name="example_address">55555 Five Ave Long Beach CA 90840</string>
 </resources>
