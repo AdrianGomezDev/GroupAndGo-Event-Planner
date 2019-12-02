@@ -1,6 +1,7 @@
 package com.example.groupandgoeventplanner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.Objects;
 
@@ -33,6 +35,9 @@ public class EventsPage extends Fragment{
     private TextView date;
     private TextView locationName;
     private TextView complete;
+
+    Intent intent;
+    GeoPoint geo;
 
     private EventsModel eventsModel;
 
@@ -99,6 +104,7 @@ public class EventsPage extends Fragment{
         complete = layout.findViewById(R.id.complete_text_view);
         Button completeButton = layout.findViewById(R.id.completeButton);
         Button backButton = layout.findViewById(R.id.backButton);
+        Button mapButton = layout.findViewById(R.id.mapButton);
 
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +137,18 @@ public class EventsPage extends Fragment{
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        mapButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(EventsPage.this.getActivity(),MapViewerActivityPublic.class);
+                //intent.putExtra("lat", geo.getLatitude());
+                //intent.putExtra("long", geo.getLongitude());
+                intent.putExtra("eventName",name.getText().toString());
+                startActivity(intent);
             }
         });
 
