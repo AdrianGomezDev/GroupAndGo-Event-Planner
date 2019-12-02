@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="125dp"
+            android:backgroundTint="#FFFFFF"
             android:onClick="sign_out_handler"
             android:text="Sign out" />
     </android.support.design.widget.NavigationView>
