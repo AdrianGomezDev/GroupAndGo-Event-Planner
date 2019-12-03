@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/map"
-            android:title="Events Map" />
+            android:title="Public Events Map" />
         <item
             android:id="@+id/nav_show_invitations_2"
             android:icon="@drawable/ic_menu_manage"

@@ -100,7 +100,7 @@ public class MapViewerActivityPrivate extends FragmentActivity implements OnMapR
                             double lat = point.getLatitude();
                             double lng = point.getLongitude();
                             LatLng latLng = new LatLng(lat,lng);
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Event: " + (i+1)));
+                            mMap.addMarker(new MarkerOptions().position(latLng).title("Venue: " + (i+1)));
 
                         }
 
