@@ -23,7 +23,7 @@
         <item
             android:id="@+id/nav_show_invitations_2"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Show Invitations_2" />
+            android:title="Show Invitations" />
     </group>
 
     <item android:title="Communicate">
