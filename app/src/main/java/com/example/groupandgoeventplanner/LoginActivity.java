@@ -221,8 +221,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                             Map<String, Object> user_email = new HashMap<>();
                             user_email.put(data.getStringExtra("username"), data.getStringExtra("email"));
+                            //users_emails.update(user_email).addOnSuccessListener((OnSuccessListener) (avoid))
 
-                            users_emails.set(user_email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            users_emails.update(user_email).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d(TAG, "Added user name and email");
