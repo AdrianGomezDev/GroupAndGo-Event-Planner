@@ -90,17 +90,23 @@ public class MapViewerActivityPrivate extends FragmentActivity implements OnMapR
                     if (document.exists()) {
                         //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         //intent = getIntent();
+                        List<String> desc = (List<String>) document.get("desc");
+
+
                         List<GeoPoint> points = (List<GeoPoint>) document.get("points");
                         GeoPoint home = points.get(0);
                         LatLng latLngHome = new LatLng(home.getLatitude(),home.getLongitude());
 
                         for(int i = 0; i < points.size(); i++)
                         {
+                            String description = desc.get(i);
+                            //String descFormat = description.replace("bbb","\n");
+
                             GeoPoint point = points.get(i);
                             double lat = point.getLatitude();
                             double lng = point.getLongitude();
                             LatLng latLng = new LatLng(lat,lng);
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Venue: " + (i+1)));
+                            mMap.addMarker(new MarkerOptions().position(latLng).title("Venue: " + (i+1)).snippet(description));
 
                         }
 

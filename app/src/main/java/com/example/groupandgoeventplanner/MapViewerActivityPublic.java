@@ -18,11 +18,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 
 public class MapViewerActivityPublic extends FragmentActivity implements OnMapReadyCallback {
@@ -84,12 +89,20 @@ public class MapViewerActivityPublic extends FragmentActivity implements OnMapRe
                     if (document.exists()) {
                         //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         //intent = getIntent();
+                        Timestamp date = document.getTimestamp("date");
+                        //String s = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(date.get);
+                        Date dateD = new Date(date.getSeconds()*1000L);
+                        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy ");
+                        sdf.setTimeZone(TimeZone.getTimeZone("GMT-8"));
+                        String s = sdf.format(dateD);
+
+
                         GeoPoint geo = document.getGeoPoint("latLong");
                         String name = document.getString("name");
                         double lat = geo.getLatitude();//intent.getExtras().getDouble("lat");
                         double lng = geo.getLongitude();//intent.getExtras().getDouble("long");
                         LatLng latLng = new LatLng(lat,lng);
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(name));
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(name).snippet(s));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
                     } else {
                         //Log.d(TAG, "No such document");
