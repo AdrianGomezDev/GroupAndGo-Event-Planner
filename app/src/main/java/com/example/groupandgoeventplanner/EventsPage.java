@@ -144,7 +144,7 @@ public class EventsPage extends Fragment{
 
             @Override
             public void onClick(View v) {
-                intent = new Intent(EventsPage.this.getActivity(),MapViewerActivityPublic.class);
+                intent = new Intent(EventsPage.this.getActivity(),MapViewerActivityPrivate.class);
                 //intent.putExtra("lat", geo.getLatitude());
                 //intent.putExtra("long", geo.getLongitude());
                 intent.putExtra("eventName",name.getText().toString());

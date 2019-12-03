@@ -55,7 +55,7 @@
     <string name="locname">Address</string>
 
     <string name="status">Status:</string>
-    <string name="complete_exclamation">Complete!</string>
+    <string name="complete_exclamation">Remove</string>
     <string name="back">BACK</string>
     <string name="signed_out">Sign In to Begin</string>
     <string name="auth_failed">Authentication Failed.</string>

@@ -57,6 +57,10 @@
             android:name=".MapViewerActivityPublic"
             android:label="MAPSPUBLIC"/>
 
+        <activity
+            android:name=".MapViewerActivityPrivate"
+            android:label="MAPSPUBLIC"/>
+
 
 
     </application>
