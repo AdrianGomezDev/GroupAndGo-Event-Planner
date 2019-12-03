@@ -108,6 +108,16 @@
             app:layout_constraintStart_toStartOf="@id/completeButton"
             app:layout_constraintTop_toBottomOf="@+id/completeButton"/>
 
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round"
+            android:layout_marginTop="32dp"
+            android:text="@string/view_location_on_map"
+            app:layout_constraintStart_toStartOf="@id/backButton"
+            app:layout_constraintTop_toBottomOf="@+id/backButton"/>
+
 
 
 
